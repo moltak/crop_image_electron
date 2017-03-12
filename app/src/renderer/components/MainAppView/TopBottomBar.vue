@@ -8,6 +8,7 @@
         <div class="pane-sm sidebar">
           <button class="btn btn-default"  v-on:click="selectSrc">Select src</button>
           <button class="btn btn-default"  v-on:click="selectDst">Select dst</button>
+          <button class="btn btn-default"  v-on:click="crop">crop</button>
           <span class="icon icon-note"></span>
         </div>
         <div class="pane">
@@ -21,19 +22,29 @@
 </template>
 
 <script>
+  import fs from 'fs'
+  import rx from 'rxjs'
 
   export default {
     name: 'topbottom-bar',
+    data () {
+      return {
+        dst: '',
+        src: ''
+      }
+    },
     created () {
     },
     methods: {
       selectSrc () {
-        const path = this.$electron.remote.dialog.showOpenDialog({properties: ['openDirectory']})
-        console.log(`src: ${path}`)
+        this.src = this.$electron.remote.dialog.showOpenDialog({properties: ['openDirectory']})
       },
       selectDst () {
-        const path = this.$electron.remote.dialog.showOpenDialog({properties: ['openDirectory']})
-        console.log(`dst: ${path}`)
+        this.dst = this.$electron.remote.dialog.showOpenDialog({properties: ['openDirectory']})
+      },
+      crop () {
+        console.log(fs)
+        console.log(rx)
       }
     }
   }

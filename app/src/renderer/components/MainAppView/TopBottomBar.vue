@@ -5,8 +5,13 @@
     </header>
     <div class="window-content">
       <div class="pane-group">
-        <div class="pane-sm sidebar">sidebar</div>
-        <div class="pane">pane</div>
+        <div class="pane-sm sidebar">
+          <button class="btn btn-default"  v-on:click="selectSrc">Select src</button>
+          <button class="btn btn-default"  v-on:click="selectDst">Select dst</button>
+          <span class="icon icon-note"></span>
+        </div>
+        <div class="pane">
+        </div>
       </div>
     </div>
     <footer class="toolbar toolbar-footer">
@@ -16,8 +21,21 @@
 </template>
 
 <script>
+
   export default {
-    name: 'topbottom-bar'
+    name: 'topbottom-bar',
+    created () {
+    },
+    methods: {
+      selectSrc () {
+        const path = this.$electron.remote.dialog.showOpenDialog({properties: ['openDirectory']})
+        console.log(`src: ${path}`)
+      },
+      selectDst () {
+        const path = this.$electron.remote.dialog.showOpenDialog({properties: ['openDirectory']})
+        console.log(`dst: ${path}`)
+      }
+    }
   }
 </script>
 
